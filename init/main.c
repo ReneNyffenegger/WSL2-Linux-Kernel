@@ -955,6 +955,10 @@ asmlinkage __visible void __init __no_sanitize_address start_kernel(void)
 	boot_cpu_init();
 	page_address_init();
 	pr_notice("%s", linux_banner);
+	pr_notice("TQ84 init/main.c, after printing linux_banner, going to dump_stack()\n"); //   lib/dump_stack.c
+	dump_stack();
+	pr_notice("tq84 after   dump_stack");
+  pr_info  ("tq84 pr_info dump_stack");
 	early_security_init();
 	setup_arch(&command_line);
 	setup_boot_config();
@@ -1431,7 +1435,8 @@ static int run_init_process(const char *init_filename)
 		pr_debug("    %s\n", *p);
 	pr_debug("  with environment:\n");
 	for (p = envp_init; *p; p++)
-		pr_debug("    %s\n", *p);
+	pr_debug("    %s\n", *p);
+  pr_notice("TQ84: dumping stack"); dump_stack();
 	return kernel_execve(init_filename, argv_init, envp_init);
 }
 

@@ -1016,8 +1016,10 @@ void dxgk_validate_ioctls(void);
 #endif /* DEBUG */
 
 #define DXG_TRACE_IOCTL_END(ret)  do {			\
-	if (ret < 0)					\
+	if (ret < 0)					{ \
 		DXG_ERR("Ioctl failed: %d", ret);	\
+    pr_notice("TQ84: dumping stack"); dump_stack(); \
+  } \
 	else						\
 		DXG_TRACE("Ioctl returned: %d", ret);	\
 } while (0)
